@@ -167,7 +167,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="{{route('courses.index')}}" class="nav-link @if(request()->routeIs('courses.*'))active @endif">
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Courses
@@ -176,7 +176,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="{{route('students.index')}}" class="nav-link @if(request()->routeIs('students.*'))active @endif">
             <i class="far fa-circle nav-icon"></i>
               <p>
                 Students
@@ -254,10 +254,10 @@
 <script src="{{asset('admin-dashboard/dist/js/adminlte.js')}}"></script>
 
 <!-- OPTIONAL SCRIPTS -->
-<script src="dist/js/demo.js"></script>
+<script src="{{asset('admin-dashboard/dist/js/demo.js')}}"></script>
 
 
 <!-- PAGE SCRIPTS -->
-<script src="{{asset('dist/js/pages/dashboard2.js')}}"></script>
+<script src="{{asset('admin-dashboard/dist/js/pages/dashboard2.js')}}"></script>
 </body>
 </html>
