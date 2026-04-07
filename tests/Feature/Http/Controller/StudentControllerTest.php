@@ -8,6 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use App\Governorate;
+use Symfony\Component\HttpKernel\HttpCache\Store;
 
 class StudentControllerTest extends TestCase
 {
@@ -95,6 +96,14 @@ class StudentControllerTest extends TestCase
 
     public function test_delete_student_successfully() :void
     {
+        // setup fake storage
+        Storage::fake('public');
+
+        // create image
+        $image = UploadedFile::fake()->create('student.jpg','100');
+
+        $path  = $image->store('avatars','public');
+
         $student = Student::create([
            'nameEn' => fake()->name() ,
             'nameAr' =>  fake('ar_SA')->name(),
@@ -102,16 +111,24 @@ class StudentControllerTest extends TestCase
             'birthDate' => fake()->date('d-m-Y'),
             'governorate' => fake()->randomElement(['cairo','giza','alexandria']),
             'NationalId' => fake()->numerify('##############'),
-            // 'photo' => $file,
+            'photoPath' => $path ,
             'phoneNumber' => fake()->regexify('01(0|1|2|5)[0-9]{8}'),
             'studentStatus' => fake()->randomElement([0,1]),
             'school' => fake()->company(). 'School',
 
         ]);
 
+        // 5. Verify the file exists before deletion
+        Storage::disk('public')->assertExists($path );
+
         $response = $this->delete(route('students.destroy',$student));
 
+        // 7. Assert: Redirected and Database is empty
         $response->assertStatus(302);
+        $this->assertDatabaseMissing('students', ['id' => $student->id]);
+
+        // 8. Assert: The file is GONE from storage
+        Storage::disk('public')->assertMissing($path);
 
     }
 }

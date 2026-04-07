@@ -65,7 +65,6 @@ class StudentController extends Controller
                 Storage::delete($student->photoPath);
             }
             $modfiedStudent['photoPath'] = $photo->store('avatars','public');
-            // dd(asset($modfiedStudent['photoPath']));
         } 
         $student->update($modfiedStudent);
         return redirect(route('students.index'))->with('success','modfied student\'s information successfull');
@@ -76,6 +75,9 @@ class StudentController extends Controller
      */
     public function destroy(student $student)
     {
+        if($student->photoPath && $student->photoPath !== 'avatars/default_photo.jpg'){
+            storage::disk('public')->delete($student->photoPath);
+        }
         $student->delete();
         return redirect(route('students.index'))->with('success','delete student successfully');
     }
