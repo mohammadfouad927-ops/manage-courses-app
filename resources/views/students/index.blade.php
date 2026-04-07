@@ -80,6 +80,11 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+        </div>
+         <!-- Pagination Footer -->
+        <div class="card-footer bg-white border-0 py-3">
+            <div class="d-flex justify-content-end">
                 {{ $students->links() }}
             </div>
         </div>

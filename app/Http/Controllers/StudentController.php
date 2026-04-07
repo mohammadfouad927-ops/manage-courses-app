@@ -23,7 +23,7 @@ class StudentController extends Controller
      */
     public function create():View
     {
-        return view('students.create',['students' => Student::paginate(20)]);
+        return view('students.create');
     }
 
     /**
