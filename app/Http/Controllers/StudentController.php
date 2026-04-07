@@ -15,7 +15,7 @@ class StudentController extends Controller
      */
     public function index():View
     {
-        return view('students.index');
+        return view('students.index',["students" => Student::paginate(50)]);
     }
 
     /**
@@ -32,7 +32,7 @@ class StudentController extends Controller
     public function store(StorestudentRequest $request)
     {
         $student = $request->safe()->except('photo');
-        $student['photoPath'] = $request->validated('photo')?->store('avatars');
+        $student['photoPath'] = $request->validated('photo')?->store('avatars', 'public');
         Student::create($student);
         return redirect(route('students.index'))->with('success','Add new Students successfully');
     }
@@ -64,7 +64,8 @@ class StudentController extends Controller
             if($student->photoPath && $student->photoPath !== 'avatars/default_photo.jpg'){
                 Storage::delete($student->photoPath);
             }
-            $modfiedStudent['photoPath'] = $photo->store('avatars');
+            $modfiedStudent['photoPath'] = $photo->store('avatars','public');
+            // dd(asset($modfiedStudent['photoPath']));
         } 
         $student->update($modfiedStudent);
         return redirect(route('students.index'))->with('success','modfied student\'s information successfull');
