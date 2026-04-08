@@ -184,10 +184,18 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
                 enrollments
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('programs.index')}}" class="nav-link @if(request()->routeIs('programs.*'))active @endif">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Programs
               </p>
             </a>
           </li>
@@ -255,6 +263,7 @@
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{asset('admin-dashboard/dist/js/demo.js')}}"></script>
+@stack('scripts')
 
 
 <!-- PAGE SCRIPTS -->
