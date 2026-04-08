@@ -12,7 +12,7 @@ class TrainingProgram extends Model
     ];
 
     
-    public function course(): BelongsToMany{
-        return $this->belongsToMany(Course::class, 'Training_program_courses','course_id', 'trainingProgram_id');
+    public function courses(): BelongsToMany{
+        return $this->belongsToMany(Course::class, 'training_programs_courses', 'trainingProgram_id', 'course_id');
     }
 }

@@ -13,7 +13,8 @@ class Course extends Model
         'active',
     ];
 
-    public function trainingProgram():BelongsToMany{
-        return $this->belongsToMany(TrainingProgram::class, 'training_program_courses','trainingProgram_id','course_id');
+    public function trainingPrograms():BelongsToMany{
+        return $this->belongsToMany(TrainingProgram::class, 'training_programs_courses','course_id', 'trainingProgram_id')
+                    ->withTimestamps();
     }
 }
