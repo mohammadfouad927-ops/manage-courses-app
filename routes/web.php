@@ -3,6 +3,7 @@
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TrainigProgramController;
+use App\Http\Controllers\ProgramSessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,3 +19,7 @@ Route::resource('courses',CoursesController::class);
 Route::resource('students', StudentController::class);
 
 Route::resource('programs', TrainigProgramController::class);
+
+Route::resource('program-sessions', ProgramSessionController::class)->parameters([
+    'program-sessions' => 'programSession'
+]);

@@ -2,67 +2,144 @@
 
 @section('title','Courses')
 
-@section('path','Courese')
+@push('css')
+  <style>
+      /* Table Styling */
+      .table thead th {
+          letter-spacing: 0.05em;
+          font-size: 0.75rem;
+      }
+
+      /* Soft Badges */
+      .badge-soft-success {
+          background-color: rgba(40, 167, 69, 0.12);
+          color: #28a745;
+          border: 1px solid rgba(40, 167, 69, 0.2);
+      }
+
+      .badge-soft-secondary {
+          background-color: rgba(108, 117, 125, 0.1);
+          color: #6c757d;
+          border: 1px solid rgba(108, 117, 125, 0.2);
+      }
+
+      /* White Button Style */
+      .btn-white {
+          background-color: #fff;
+          color: #444;
+      }
+      .btn-white:hover {
+          background-color: #f8f9fa;
+          color: #000;
+      }
+
+      /* Horizontal list spacing for actions */
+      .btn-group .btn {
+          padding: 0.375rem 0.75rem;
+      }
+      
+      .table-hover tbody tr:hover {
+          background-color: rgba(0, 123, 255, 0.015);
+      }
+  </style>
+@endpush
+
+@section('path','Courses')
 
 @section('pageName','Courses')
 
 @section('content')
-    <div class="container bg-white p-4 shadow-sm rounded">
-      <!-- Header Section -->
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="mb-0 text-dark">Course List</h3>
-        <a href="{{route('courses.create')}}" class="btn btn-primary shadow-sm" role="button">
-          <i class="fas fa-plus"></i> Add New Course
-        </a>
-      </div>
+<div class="container-fluid py-4">
+    <div class="card border-0 shadow-sm rounded-lg">
+        <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 font-weight-bold text-primary">Course Catalog</h5>
+            <a href="{{route('courses.create')}}" class="btn btn-primary btn-sm px-4 shadow-sm ml-auto">
+                <i class="fas fa-plus mr-1"></i> Add New Course
+            </a>
+        </div>
 
-      <div class="table-responsive">
-        <table class="table table-hover align-middle">
-          <thead class="thead-light">
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Code</th>
-              <th>Status</th>
-              <th>Created At</th>
-              <th class="text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            @if($courses->isEmpty())
-            <tr>
-              <td colspan="6" class="text-center py-4 text-muted">No data available in this table</td>
-            </tr>
-            @else
-            @foreach($courses as $course)
-            <tr>
-              <td>{{$course->id}}</td>
-              <td class="font-weight-bold">{{$course->name}}</td>
-              <td><code>{{$course->code}}</code></td>
-              <td>
-                @if($course->active)
-                <span class="badge badge-success px-3 py-2">Activated</span>
-                @else
-                <span class="badge badge-danger px-3 py-2">Not Activated</span>
-                @endif
-              </td>
-              <td class="text-muted">{{$course->created_at->format('d-m-Y h:i A')}}</td>
-              <td class="text-center">
-                <div class="d-flex justify-content-center gap-2">
-                  <a class="btn btn-sm btn-warning mr-1" href="{{route('courses.edit',$course->id)}}">Edit</a>
-                  
-                  <form action="{{route('courses.destroy',$course)}}" method="post" class="m-0">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
-                  </form>
-                </div>
-              </td>
-            </tr>
-            @endforeach
-            @endif
-          </tbody>
-        </table>
-      </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr class="text-secondary small text-uppercase font-weight-bold">
+                            <th class="py-3 px-4 border-0">Course Info</th>
+                            <th class="py-3 border-0">Course Code</th>
+                            <th class="py-3 border-0 text-center">Status</th>
+                            <th class="py-3 border-0">Added On</th>
+                            <th class="py-3 px-4 border-0 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($courses as $course)
+                        <tr>
+                            <td class="py-3 px-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="mr-3 text-muted font-weight-light">#{{ $course->id }}</div>
+                                    <span class="font-weight-bold text-dark">{{ $course->name }}</span>
+                                </div>
+                            </td>
+
+                            <td class="py-3">
+                                <span class="badge badge-light border text-monospace px-2 py-1" style="letter-spacing: 1px;">
+                                    {{ $course->code }}
+                                </span>
+                            </td>
+
+                            <td class="py-3 text-center">
+                                @if($course->active)
+                                    <span class="badge badge-soft-success rounded-pill px-3 py-2">
+                                        <i class="fas fa-check-circle mr-1"></i> Active
+                                    </span>
+                                @else
+                                    <span class="badge badge-soft-secondary rounded-pill px-3 py-2">
+                                        <i class="fas fa-times-circle mr-1"></i> Inactive
+                                    </span>
+                                @endif
+                            </td>
+
+                            <td class="py-3 text-muted small">
+                                <div>{{ $course->created_at->format('M d, Y') }}</div>
+                                <div style="font-size: 0.7rem;">{{ $course->created_at->format('h:i A') }}</div>
+                            </td>
+
+                            <td class="py-3 px-4 text-center">
+                                <div class="btn-group shadow-sm rounded-lg" role="group">
+                                    <a href="{{route('courses.edit',$course->id)}}" class="btn btn-white btn-sm border" title="Edit">
+                                        <i class="fas fa-pen text-warning"></i>
+                                    </a>
+                                    
+                                    <form action="{{route('courses.destroy',$course)}}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-white btn-sm border border-left-0" 
+                                                onclick="return confirm('Delete this course?');" title="Delete">
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center py-5">
+                                <i class="fas fa-folder-open fa-3x text-light mb-3 d-block"></i>
+                                <span class="text-muted">No courses available yet. Start by adding one!</span>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        @if($courses->hasPages())
+        <div class="card-footer bg-white border-0 py-3">
+            <div class="d-flex justify-content-end">
+                {{ $courses->links() }}
+            </div>
+        </div>
+        @endif
     </div>
+</div>
 @endsection
