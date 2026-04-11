@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{asset('admin-dashboard/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  @stack('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -196,6 +197,14 @@
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Programs
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('program-sessions.index')}}" class="nav-link @if(request()->routeIs('program-sessions.*'))active @endif">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Program Sessions
               </p>
             </a>
           </li>

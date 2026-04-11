@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{asset('admin-dashboard/css/bootstrap_rtl-v4.2.1/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin-dashboard/css/bootstrap_rtl-v4.2.1/custom_rtl.css')}}">
   <link rel="stylesheet" href="{{asset('admin-dashboard/css/mycustomstyle.css')}}">
-  
+  @stack('css')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

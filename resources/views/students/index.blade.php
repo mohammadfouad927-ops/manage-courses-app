@@ -55,16 +55,16 @@
                             </td>
                             <td class="text-center">
                                 <div class="btn-group" role="group">
-                                    <a href="{{route('students.edit', $student)}}" class="btn btn-outline-warning btn-sm border-0" title="Edit">
-                                        <i class="fas fa-edit"></i>
+                                    <a href="{{route('students.edit', $student)}}" class="btn btn-white btn-sm border" title="Edit">
+                                        <i class="fas fa-pen text-warning"></i>
                                     </a>
                                     
                                     <form action="{{route('students.destroy', $student)}}" method="post" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger btn-sm border-0" 
-                                                onclick="return confirm('Delete student? This cannot be undone.');" title="Delete">
-                                            <i class="fas fa-trash"></i>
+                                        <button type="submit" class="btn btn-white btn-sm border border-left-0" 
+                                                onclick="return confirm('Delete this student?');" title="Delete">
+                                            <i class="fas fa-trash text-danger"></i>
                                         </button>
                                     </form>
                                 </div>
