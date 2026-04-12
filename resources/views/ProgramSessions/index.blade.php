@@ -1,23 +1,5 @@
 @extends('layout.starter-en')
 
-@push('css')
-    <style>
-        /* Add a subtle hover effect to rows */
-        .table-hover tbody tr:hover {
-            background-color: rgba(0, 123, 255, 0.02);
-            transition: background-color 0.2s ease;
-        }
-
-        /* Soft Badge Colors */
-        .bg-soft-success { background-color: rgba(40, 167, 69, 0.1) !important; color: #28a745 !important; }
-        .bg-soft-warning { background-color: rgba(255, 193, 7, 0.1) !important; color: #ffc107 !important; }
-        .bg-soft-info { background-color: rgba(23, 162, 184, 0.1) !important; color: #17a2b8 !important; }
-        .bg-soft-danger { background-color: rgba(220, 53, 69, 0.1) !important; color: #dc3545 !important; border: 1px solid rgba(220, 53, 69, 0.2); /* Optional: adds a thin subtle border */}
-        /* Vertical Alignment for clean spacing */
-        .align-middle { vertical-align: middle !important; }
-    </style>
-@endpush
-
 @section('title', 'Program Sessions')
 
 @section('path', 'Program Sessions')

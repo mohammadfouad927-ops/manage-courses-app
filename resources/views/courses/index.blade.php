@@ -2,48 +2,6 @@
 
 @section('title','Courses')
 
-@push('css')
-  <style>
-      /* Table Styling */
-      .table thead th {
-          letter-spacing: 0.05em;
-          font-size: 0.75rem;
-      }
-
-      /* Soft Badges */
-      .badge-soft-success {
-          background-color: rgba(40, 167, 69, 0.12);
-          color: #28a745;
-          border: 1px solid rgba(40, 167, 69, 0.2);
-      }
-
-      .badge-soft-secondary {
-          background-color: rgba(108, 117, 125, 0.1);
-          color: #6c757d;
-          border: 1px solid rgba(108, 117, 125, 0.2);
-      }
-
-      /* White Button Style */
-      .btn-white {
-          background-color: #fff;
-          color: #444;
-      }
-      .btn-white:hover {
-          background-color: #f8f9fa;
-          color: #000;
-      }
-
-      /* Horizontal list spacing for actions */
-      .btn-group .btn {
-          padding: 0.375rem 0.75rem;
-      }
-      
-      .table-hover tbody tr:hover {
-          background-color: rgba(0, 123, 255, 0.015);
-      }
-  </style>
-@endpush
-
 @section('path','Courses')
 
 @section('pageName','Courses')
