@@ -14,7 +14,7 @@ class BranchController extends Controller
     public function index()
     {
         return view('branches.index', [
-            'branches' => Branch::pagingate(20),
+            'branches' => Branch::paginate(20),
         ]);
     }
 

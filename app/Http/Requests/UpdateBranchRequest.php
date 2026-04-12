@@ -28,7 +28,7 @@ class UpdateBranchRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'phoneNumber' => ['required', 'string', 'size:11', 'regex:/^01(0|1|2|5)[0-9]{8}$/'],
-            'email' => ['nullable', 'string', Rule::email()->rfcCompliant(strict: true)->validateMxRecord(), Rule::unique('branches', 'email')->ignore($this->branche->id)],
+            'email' => ['nullable', 'string', Rule::email()->rfcCompliant(strict: true)->validateMxRecord(), Rule::unique('branches', 'email')->ignore($this->branch->id)],
             'googleMapLink' => ['required', 'url', new GoogleMapsUrl],
             'isActive' => ['required', 'boolean'],
         ];
