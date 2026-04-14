@@ -15,7 +15,143 @@
   <link rel="stylesheet" href="{{asset('admin-dashboard/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  @stack('css')
+  <style>
+        /* Add a subtle hover effect to rows */
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 123, 255, 0.02);
+            transition: background-color 0.2s ease;
+        }
+
+        .table thead th {
+          letter-spacing: 0.05em;
+          font-size: 0.75rem;
+        }
+
+        /* Soft Badge Colors */
+        .bg-soft-success { background-color: rgba(40, 167, 69, 0.1) !important; color: #28a745 !important; }
+        .bg-soft-warning { background-color: rgba(255, 193, 7, 0.1) !important; color: #ffc107 !important; }
+        .bg-soft-info { background-color: rgba(23, 162, 184, 0.1) !important; color: #17a2b8 !important; }
+        .bg-soft-danger { background-color: rgba(220, 53, 69, 0.1) !important; color: #dc3545 !important; border: 1px solid rgba(220, 53, 69, 0.2); /* Optional: adds a thin subtle border */}
+        /* Vertical Alignment for clean spacing */
+        .align-middle { vertical-align: middle !important; }
+         /* 2. Soft Badge Styling */
+        .badge-soft-info {
+            background-color: rgba(23, 162, 184, 0.1) !important;
+            color: #17a2b8 !important;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        
+        /* Soft Badges */
+      .badge-soft-success {
+          background-color: rgba(40, 167, 69, 0.12);
+          color: #28a745;
+          border: 1px solid rgba(40, 167, 69, 0.2);
+      }
+
+      .badge-soft-secondary {
+          background-color: rgba(108, 117, 125, 0.1);
+          color: #6c757d;
+          border: 1px solid rgba(108, 117, 125, 0.2);
+      }
+
+      .border-2 { border-width: 2px !important; }
+    
+      /* Make the switches look more modern */
+      .custom-control-label::before {
+          background-color: #dee2e6;
+          border: none;
+      }
+      
+      .custom-switch .custom-control-input:checked ~ .custom-control-label::before {
+          background-color: #28a745;
+      }
+
+      .form-control:focus {
+          border-color: #007bff;
+          box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.05);
+      }
+
+        /* 3. Button Group Look */
+        .btn-white {
+            background-color: #ffffff;
+            border-color: #dee2e6;
+        }
+        .btn-white:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .btn-group .btn {
+          padding: 0.375rem 0.75rem;
+        }
+
+        .gap-1 { gap: 0.25rem; } /* Helpful for spacing out badges */
+
+        /* 5. Modal Refinement */
+        .modal-content {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .modal-header {
+            border-bottom: 1px solid #f8f9fa;
+        }
+        /* 1. Improved Modal Radius */
+        .modal-content {
+            border-radius: 15px !important;
+            overflow: hidden;
+        }
+
+        /* 2. Soft Danger Button (for the X) */
+        .btn-soft-danger {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-soft-danger:hover {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        /* 3. Focus effect for inputs */
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.1);
+        }
+
+        /* 4. Align the close button properly in BS4 */
+        .modal-header .close {
+            padding: 1rem;
+            margin: -1rem -1rem -1rem auto;
+        }
+
+        /* 5. Custom select arrow fix (prevents ::after bug) */
+        .custom-select::after {
+            display: none !important;
+            content: none !important;
+        }
+
+        .invalid-feedback {
+        font-size: 85%;
+        color: #dc3545;
+        margin-top: 0.4rem;
+        }
+
+        /* Highlight the input border more clearly */
+        .form-control.is-invalid {
+            border-color: #dc3545 !important;
+            background-image: none; /* Removes the default Bootstrap checkmark/X */
+        }
+
+        /* Keep the input group icons red if there's an error */
+        .is-invalid ~ .input-group-append .input-group-text,
+        .border-danger {
+            border-color: #dc3545 !important;
+        }
+        
+      </style>
+        @stack('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -205,6 +341,14 @@
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Program Sessions
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('branches.index')}}" class="nav-link @if(request()->routeIs('branches.*'))active @endif">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Branches
               </p>
             </a>
           </li>

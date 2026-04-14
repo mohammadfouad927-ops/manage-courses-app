@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TrainigProgramController;
@@ -23,3 +24,5 @@ Route::resource('programs', TrainigProgramController::class);
 Route::resource('program-sessions', ProgramSessionController::class)->parameters([
     'program-sessions' => 'programSession'
 ]);
+
+Route::resource('branches', BranchController::class);
