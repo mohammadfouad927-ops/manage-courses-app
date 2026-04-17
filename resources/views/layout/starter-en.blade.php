@@ -28,6 +28,7 @@
         }
 
         /* Soft Badge Colors */
+        .bg-soft-primary { background-color: rgba(78, 115, 223, 0.1) !important; color: #4e73df !important; }
         .bg-soft-success { background-color: rgba(40, 167, 69, 0.1) !important; color: #28a745 !important; }
         .bg-soft-warning { background-color: rgba(255, 193, 7, 0.1) !important; color: #ffc107 !important; }
         .bg-soft-info { background-color: rgba(23, 162, 184, 0.1) !important; color: #17a2b8 !important; }
@@ -349,6 +350,14 @@
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Branches
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('groups.index')}}" class="nav-link @if(request()->routeIs('groups.*'))active @endif">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Groups
               </p>
             </a>
           </li>
