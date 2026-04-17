@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TrainigProgramController;
 use App\Http\Controllers\ProgramSessionController;
@@ -26,3 +27,5 @@ Route::resource('program-sessions', ProgramSessionController::class)->parameters
 ]);
 
 Route::resource('branches', BranchController::class);
+
+Route::resource('groups', GroupController::class);
