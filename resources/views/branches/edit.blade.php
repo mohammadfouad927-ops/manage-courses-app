@@ -1,10 +1,10 @@
 @extends('layout.starter-en')
 
-@section('title', 'Branches')
+@section('title', 'Edit Branch')
 
-@section('path', 'Branches')
+@section('path', 'Branches / Edit')
 
-@section('pageName', 'Branches')
+@section('pageName', 'Edit Branch')
 
 @section('content')
     <div class="container py-5">
@@ -18,22 +18,23 @@
 
                 <div class="card border-0 shadow-sm rounded-lg">
                     <div class="card-header bg-white border-0 py-4 px-4">
-                        <h4 class="mb-0 font-weight-bold text-primary">Branch Information</h4>
-                        <p class="text-muted mb-0">Fill in the details below to register a new physical location.</p>
+                        <h4 class="mb-0 font-weight-bold text-primary">Edit Branch: {{ $branch->name }}</h4>
+                        <p class="text-muted mb-0">Modify the contact information or physical location of this branch.</p>
                     </div>
 
                     <div class="card-body p-4">
                         <form action="{{ route('branches.update', $branch) }}" method="POST">
                             @csrf
                             @method('PUT')
+                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-4">
                                         <label class="small text-uppercase font-weight-bold text-muted">Branch Name</label>
-                                        <input type="text" name="name" class="form-control form-control-lg border-2" placeholder="e.g. Main Headquarters" value="{{old('name', $branch->name)}}" required>
-
+                                        <input type="text" name="name" class="form-control form-control-lg border-2 @error('name') is-invalid @enderror" 
+                                               placeholder="e.g. Main Headquarters" value="{{ old('name', $branch->name) }}" required>
                                         @error('name')
-                                            <span class="invalid-feedback d-block font-weight-bold" role="alert">
+                                            <span class="invalid-feedback d-block font-weight-bold">
                                                 <i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}
                                             </span>
                                         @enderror
@@ -45,14 +46,14 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-light border-right-0"><i class="fas fa-phone text-muted"></i></span>
                                             </div>
-                                            <input type="text" name="phoneNumber" class="form-control border-left-0" value="{{old('phoneNumber', $branch->phoneNumber)}}" placeholder="+20 ...">
-
-                                            @error('phoneNumber')
-                                                <span class="invalid-feedback d-block font-weight-bold" role="alert">
-                                                    <i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}
-                                                </span>
-                                            @enderror
+                                            <input type="text" name="phoneNumber" class="form-control border-left-0 @error('phoneNumber') is-invalid @enderror" 
+                                                   value="{{ old('phoneNumber', $branch->phoneNumber) }}" placeholder="+20 ...">
                                         </div>
+                                        @error('phoneNumber')
+                                            <span class="invalid-feedback d-block font-weight-bold">
+                                                <i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group mb-4">
@@ -61,24 +62,24 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-light border-right-0"><i class="fas fa-envelope text-muted"></i></span>
                                             </div>
-                                            <input type="email" name="email" class="form-control border-left-0" value="{{old('email', $branch->email)}}" placeholder="branch@company.com">
-
-                                            @error('email')
-                                                <span class="invalid-feedback d-block font-weight-bold" role="alert">
-                                                    <i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}
-                                                </span>
-                                            @enderror
+                                            <input type="email" name="email" class="form-control border-left-0 @error('email') is-invalid @enderror" 
+                                                   value="{{ old('email', $branch->email) }}" placeholder="branch@company.com">
                                         </div>
+                                        @error('email')
+                                            <span class="invalid-feedback d-block font-weight-bold">
+                                                <i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group mb-4">
                                         <label class="small text-uppercase font-weight-bold text-muted">Physical Address</label>
-                                        <input type="text" name="address" class="form-control form-control-lg border-2" placeholder="Street name, Building No." value="{{old('address', $branch->address)}}" required>
-
+                                        <input type="text" name="address" class="form-control form-control-lg border-2 @error('address') is-invalid @enderror" 
+                                               placeholder="Street name, Building No." value="{{ old('address', $branch->address) }}" required>
                                         @error('address')
-                                            <span class="invalid-feedback d-block font-weight-bold" role="alert">
+                                            <span class="invalid-feedback d-block font-weight-bold">
                                                 <i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}
                                             </span>
                                         @enderror
@@ -90,17 +91,18 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-light border-right-0"><i class="fas fa-map-marked-alt text-muted"></i></span>
                                             </div>
-                                            <input type="url" name="googleMapLink" class="form-control border-left-0"  value="{{old('googleMapLink', $branch->googleMapLink)}}" placeholder="https://maps.app.goo.gl/...">
-                                            @error('googleMapLink')
-                                                <span class="invalid-feedback d-block font-weight-bold" role="alert">
-                                                    <i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}
-                                                </span>
-                                            @enderror
+                                            <input type="url" name="googleMapLink" class="form-control border-left-0 @error('googleMapLink') is-invalid @enderror" 
+                                                   value="{{ old('googleMapLink', $branch->googleMapLink) }}" placeholder="https://maps.app.goo.gl/...">
                                         </div>
+                                        @error('googleMapLink')
+                                            <span class="invalid-feedback d-block font-weight-bold">
+                                                <i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group mb-4">
-                                        <label class="small text-uppercase font-weight-bold text-muted">Initial Status</label>
+                                        <label class="small text-uppercase font-weight-bold text-muted">Operational Status</label>
                                         <div class="d-flex align-items-center justify-content-between p-3 rounded border bg-light">
                                             <div>
                                                 <span class="font-weight-bold d-block">Active Status</span>
@@ -108,7 +110,8 @@
                                             </div>
                                             <div class="custom-control custom-switch custom-switch-lg">
                                                 <input type="hidden" name="isActive" value="0">
-                                                <input type="checkbox" name="isActive" class="custom-control-input" id="branchStatus" value="1" @if(old('isActive', $branch->isActive)) checked @endif>
+                                                <input type="checkbox" name="isActive" class="custom-control-input" id="branchStatus" value="1" 
+                                                       @if(old('isActive', $branch->isActive)) checked @endif>
                                                 <label class="custom-control-label" for="branchStatus"></label>
                                             </div>
                                         </div>
@@ -118,10 +121,10 @@
 
                             <hr class="my-4 opacity-5">
 
-                            <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn btn-link text-muted mr-3">Reset Form</button>
-                                <button type="submit" class="btn btn-primary px-5 py-2 shadow font-weight-bold rounded-pill">
-                                    <i class="fas fa-save mr-2"></i> Create Branch
+                            <div class="d-flex justify-content-end align-items-center">
+                                <a href="{{ route('branches.index') }}" class="btn btn-link text-muted mr-3">Cancel Changes</a>
+                                <button type="submit" class="btn btn-warning px-5 py-2 shadow font-weight-bold rounded-pill text-white">
+                                    <i class="fas fa-sync-alt mr-2"></i> Update Branch Details
                                 </button>
                             </div>
                         </form>

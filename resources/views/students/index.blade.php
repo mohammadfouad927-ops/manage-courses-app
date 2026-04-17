@@ -51,7 +51,7 @@
                             </td>
                             <td class="text-muted">{{ $student->email }}</td>
                             <td>
-                                <span class="badge badge-soft-info px-2 py-1">{{ $student->school }}</span>
+                                <span class="badge @if($student->studentStatus)badge-soft-info @else badge-soft-secondary @endif px-2 py-1">{{ $student->school }}</span>
                             </td>
                             <td class="text-center">
                                 <div class="btn-group" role="group">
