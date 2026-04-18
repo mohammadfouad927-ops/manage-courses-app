@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\DaysWeek;
 
 class GroupSchedule extends Model
 {
@@ -16,5 +17,12 @@ class GroupSchedule extends Model
     public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Group::class);
+    }
+
+    public function casts(): array
+    {
+        return [
+            'day' => DaysWeek::class,
+        ];
     }
 }
