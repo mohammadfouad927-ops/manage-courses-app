@@ -23,6 +23,8 @@ class GroupSchedule extends Model
     {
         return [
             'day' => DaysWeek::class,
+            'start_time' => 'datetime: g:i A',
+            'end_time' => 'datetime: g:i A',
         ];
     }
 }
