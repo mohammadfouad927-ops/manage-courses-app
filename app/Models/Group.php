@@ -25,4 +25,9 @@ class Group extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+
+    public function groupSchedules()
+    {
+        return $this->hasMany(GroupSchedule::class);
+    }
 }
