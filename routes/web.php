@@ -7,6 +7,7 @@ use App\Http\Controllers\GroupScheduleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TrainigProgramController;
 use App\Http\Controllers\ProgramSessionController;
+use App\Http\Controllers\EnrollmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,3 +33,5 @@ Route::resource('branches', BranchController::class);
 Route::resource('groups', GroupController::class);
 
 Route::resource('groupSchedules', GroupScheduleController::class);
+
+Route::resource('enrollments', EnrollmentController::class);
