@@ -18,4 +18,9 @@ class ProgramSession extends Model
     {
         return $this->belongsTo(TrainingProgram::class);
     }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
+    }
 }
