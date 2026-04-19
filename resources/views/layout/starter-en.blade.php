@@ -150,6 +150,43 @@
         .border-danger {
             border-color: #dc3545 !important;
         }
+        #toast-container {
+              position: fixed;
+              top: 20px;
+              right: 20px;
+              z-index: 9999;
+        }
+
+        .native-toast {
+            min-width: 250px;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        .toast-success { background-color: #28a745; }
+        .toast-error { background-color: #dc3545; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .fade-out {
+            animation: slideOut 0.3s ease forwards;
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
         
       </style>
         @stack('css')
@@ -322,7 +359,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('enrollments.index')}}" class="nav-link @if(request()->routeIs('enrollments.*')) active @endif">
               <i class="far fa-circle nav-icon"></i>
               <p>
                 enrollments
@@ -358,6 +395,14 @@
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Groups
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('groupSchedules.index')}}" class="nav-link @if(request()->routeIs('groupSchedules.*'))active @endif">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Groups Schedules
               </p>
             </a>
           </li>
@@ -411,6 +456,43 @@
     </div>
   </footer>
 </div>
+<div id="toast-container"></div>
+
+<script>
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    
+    // Set classes
+    toast.classList.add('native-toast');
+    toast.classList.add(type === 'success' ? 'toast-success' : 'toast-error');
+    
+    // Add content (Icon + Message)
+    const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+    toast.innerHTML = `
+        <span><i class="fas fa-${icon} mr-2"></i> ${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    // Auto-remove after 4 seconds
+    setTimeout(() => {
+        toast.classList.add('fade-out');
+        toast.addEventListener('animationend', () => {
+            toast.remove();
+        });
+    }, 4000);
+}
+
+// Laravel Session Listeners
+@if(session('success'))
+    showToast("{{ session('success') }}", 'success');
+@endif
+
+@if(session('error'))
+    showToast("{{ session('error') }}", 'error');
+@endif
+</script>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
